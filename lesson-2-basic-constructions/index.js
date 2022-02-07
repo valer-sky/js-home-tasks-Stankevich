@@ -70,8 +70,27 @@ anketa = fio + ' ' +'\n' +
 
 alert(anketa);
 
+// let user = prompt('Кто там?', '');
+// if (user === 'Админ') {
+//    let password = prompt('Пароль?', '');
+//         if (password === 'Я главный') {
+//             alert('Здравствуйте!');
+//         } else if(password === '' || password === null) {
+//             alert('Отменено');
+//         } else {
+//             alert('Неверный пароль');
+//         }
+        
+// } else if (user === null || user === '') {
+//     alert('Я вас не знаю');
+// } else {
+//     alert('Отменено');
+// }
 
 
+// let i = 0;
+// while (i++ < 5)
+//  alert( i );
 
 // для приветствия на экране
 var today = new Date();

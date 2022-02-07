@@ -22,7 +22,6 @@ var a = countVowels(question); // присваивание переменной 
 alert('Колличество гласных в слове:' + ' ' + a);
 
 // Задание 2
-
 let firstName = prompt('Ваше имя?', '');
 while (firstName === null || firstName === '' || firstName === typeof('number')){
    firstName = prompt('Введите правильное значение');
@@ -52,7 +51,6 @@ let ageYears = `Ваш возвраст в годах: ${age}`;
 let year = 365;
 let ageDays = year * age;
 let fiveYearsLater = age + 5;
-
 
 let sex;
  if (userSex === true) {

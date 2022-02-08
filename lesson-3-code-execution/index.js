@@ -47,10 +47,29 @@ width: 100,
 height: 400,
 title: 'Cool image'
 };
-var b = 2;
-var a = Object.values(image);
- console.log(a);
- console.log(a[0]);
+
+// var a = Object.values(image);
+// console.log(a);
+// function multiplyNumeric() 
+for (var key in image) {
+     if (typeof image[key] == "number") {
+       var f = image[key] * 2;
+        console.log(f);
+    }
+}
+
+    // var b = 2;
+    // var s = image[key];
+    // console.log(s);
+    // if (s === typeof "number") {
+//         var d = s * b;
+//         return d;
+//     } else {
+
+//     }
+// }
+ 
+ 
 // function multiplyNumeric(image) {
 //   if(a === typeof "number") {
 //     image = image[values] * b;

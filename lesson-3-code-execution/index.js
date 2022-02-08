@@ -16,8 +16,48 @@ var tasksCompleted = {
     'Anton': 99
 };
 
-var values = Object.values(tasksCompleted); // Используя данный метод, мы получаем доступ только к значениям объекта и передаем результат в переменную
-var result = Math.max(...values); // Метод Math.max() возвращает наибольшее из нуля или более чисел. Записываем все в переменную.
-console.log(result);
+var result = 0;
 
+for (let key in tasksCompleted) {
+    if (result < tasksCompleted[key]) { // перебираем свойства ключей 
+    result = tasksCompleted[key]; // найбольшее свойство записываем в переменную
+    var resultName = key; // присвайваем  полученый ключ  в пепременную
+    }
+}
+console.log(resultName);
+ 
+
+
+// Задание 2  (Изменение численных свойств)
+/* Напишите функцию multiplyNumeric которая принимает на вход объект и возвращает
+объект в котором все числовые значения у свойств умножены на 2. */
+
+
+// multiplyNumeric(image);
+// after
+// image = {
+// width: 200,
+// height: 800,
+// title: 'Cool image'
+// };
+
+
+var image = {
+width: 100,
+height: 400,
+title: 'Cool image'
+};
+var b = 2;
+var a = Object.values(image);
+ console.log(a);
+ console.log(a[0]);
+// function multiplyNumeric(image) {
+//   if(a === typeof "number") {
+//     image = image[values] * b;
+//   } else {
+
+//   }
+// }
+// var after = multiplyNumeric(image);
+// console.log(after);
 

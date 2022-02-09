@@ -49,18 +49,28 @@ console.log(resultName + ' ' + 'выполнил больше всех зада�
 var image = {
 width: 100,
 height: 400,
-title: 'Cool image'
+title: 'Cool image',
 };
 
-// var a = Object.values(image);
-// console.log(a);
-// function multiplyNumeric() 
-for (var key in image) {
-     if (typeof image[key] == "number") {
-       var f = image[key] * 2;
-        console.log(f);
+var obj; // переменная для хранения результата 
+function multiplyNumeric() {
+for (var key in image) { // перебераем ключи объекта image
+     if (typeof image[key] === "number") {  // проверяем  что значение ключей числовое
+        image[key] = image[key] * 2; // ключи у которых значение числовое умнажаем на 2
+        obj = image[key];  // результат присвайваем переменной
+        console.log(obj);
+        }
     }
-}
+}   multiplyNumeric(obj);
+
+
+    
+
+
+
+
+  
+
 
     
 

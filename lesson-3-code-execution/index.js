@@ -24,7 +24,11 @@ for (let key in tasksCompleted) {
     var resultName = key; // присвайваем  полученый ключ  в пепременную
     }
 }
-console.log(resultName);
+// не обязательное условие домашнего задания( больше для практики )
+var values = Object.values(tasksCompleted); // получаем массив значений объекта tasksCompleted и присвайваем их переменной
+var resultValues = Math.max(...values); // при помощи метода Math.max() записываем в переменную максимальное число значений объекта tasksCompleted
+
+console.log(resultName + ' ' + 'выполнил больше всех задач -' + ' ' + resultValues);
  
 
 
@@ -58,25 +62,5 @@ for (var key in image) {
     }
 }
 
-    // var b = 2;
-    // var s = image[key];
-    // console.log(s);
-    // if (s === typeof "number") {
-//         var d = s * b;
-//         return d;
-//     } else {
-
-//     }
-// }
- 
- 
-// function multiplyNumeric(image) {
-//   if(a === typeof "number") {
-//     image = image[values] * b;
-//   } else {
-
-//   }
-// }
-// var after = multiplyNumeric(image);
-// console.log(after);
+    
 

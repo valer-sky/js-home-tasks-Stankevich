@@ -63,6 +63,72 @@ for (var key in image) { // перебераем ключи объекта image
     }
 }   multiplyNumeric(obj);
 
+// Задание 3
+/*Напишите код, который:
+* Запрашивает по очереди значения при помощи prompt и сохраняет их в массиве.
+* Заканчивает ввод, как только посетитель введёт пустую строку, не число или нажмёт
+«Отмена».
+* При этом ноль 0 не должен заканчивать ввод, это разрешённое число.
+* Выводит сумму всех значений массива когда ввод прекращен. */
+
+// var arrNum = [];
+// var num = +prompt('Введите любое число', '0');
+// var sum;
+// do {
+//   num = +prompt('Введите любое число', '0');
+//     if (!isFinite(num) || num === null || num == '') break;
+//     { 
+//         arrNum.unshift(+num);
+//         var r = arrNum.reduce(function(sum, current) {
+//             return sum + current;
+//         });
+//     } alert(r);
+
+    
+// } 
+
+
+function showSumm () {
+var arrNum = [];
+var num; 
+var sum = 0;
+  do {
+      num = +prompt('Введите число?','');
+    //   if (!isFinite(num))
+    if (!typeof(num) === "number" || num === null || num == '') 
+      {break;
+      }
+      arrNum .unshift(+num);
+    //   arrNum .push(+num);
+
+      }
+  while (true) 
+  for (let i of arrNum ) { 
+    sum = sum + i; }
+console.log(sum);
+alert('Cумма всех значений массива = ' + sum);
+}
+showSumm();
+
+
+
+
+
+
+
+
+    
+   
+    
+      
+      
+    
+    
+   
+
+
+
+
 
     
 

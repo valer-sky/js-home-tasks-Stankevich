@@ -71,44 +71,27 @@ for (var key in image) { // перебераем ключи объекта image
 * При этом ноль 0 не должен заканчивать ввод, это разрешённое число.
 * Выводит сумму всех значений массива когда ввод прекращен. */
 
-// var arrNum = [];
-// var num = +prompt('Введите любое число', '0');
-// var sum;
-// do {
-//   num = +prompt('Введите любое число', '0');
-//     if (!isFinite(num) || num === null || num == '') break;
-//     { 
-//         arrNum.unshift(+num);
-//         var r = arrNum.reduce(function(sum, current) {
-//             return sum + current;
-//         });
-//     } alert(r);
 
-    
-// } 
+var arrNum = []; // создаем массив куда будем записывать значения введенные пользователем
+var num; // переменная для записи ответа пользователя
+var sum = 0; // переменная для записи суммы всех значений массива arrNum
 
-
-function showSumm () {
-var arrNum = [];
-var num; 
-var sum = 0;
-  do {
-      num = +prompt('Введите число?','');
+do {                                        // используем цикл do-while 
+  num = +prompt('Введите число?','');        // просим пользователя ввести число
     //   if (!isFinite(num))
-    if (!typeof(num) === "number" || num === null || num == '') 
-      {break;
-      }
-      arrNum .unshift(+num);
-    //   arrNum .push(+num);
+  if (!typeof(num) === "number" || num === null || num == '') // пока условие истинно вопрос задается многократно
+    {break;                                                   // когда условие ложно цикл заканчивается и выполняется действие
+    }
+    arrNum .push(+num); // добавление значений введенных пользователем в массив при помощи метода push();
+    // arrNum .unshift(+num);  // или при помощи метода unshift();
+    console.log(arrNum);
+  }
+while (true)
+  sum = arrNum.reduce((sum, current) => sum + current);  // при помощи метода reduce() высчитываем сумму значений массива
+  console.log(sum);
+  alert('Cумма всех значений массива = ' + sum);
 
-      }
-  while (true) 
-  for (let i of arrNum ) { 
-    sum = sum + i; }
-console.log(sum);
-alert('Cумма всех значений массива = ' + sum);
-}
-showSumm();
+
 
 
 

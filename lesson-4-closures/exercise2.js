@@ -24,7 +24,7 @@ function removeClass(obj, cls) {
     for(var  i= 0; i < arrClasses.length; i++) {    // проходимся по нему циклом  
         if(arrClasses[i] == cls) {
             arrClasses.splice(i, 1);      //Ищем в массиве нужный нам класс. Если находим его, то удаляем(splice)
-            i--;
+            i--; //уменьшаем i, чтобы следующая итерация цикла заново проверила элемент с номером i.
         }
     }
     obj.className = arrClasses.join(' '); //заново объединяем массив в строку и присваиваем объекту.
@@ -38,5 +38,3 @@ var obj = {
 console.log(removeClass(obj, 'menu'));
 console.log(removeClass(obj, 'blabla'));
 console.log(obj.className);
-
-

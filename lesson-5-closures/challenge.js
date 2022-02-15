@@ -13,3 +13,26 @@
 // 4. As an output, create 1) a new array containing all tips, and 2) an array containing final paid amounts (bill + tip). HINT: Start with two empty arrays [] as properties and then fill them up in the loop.
 
 "use strict";
+
+var jhon = {
+    family: 'Jhon`s',
+    bills: [124, 48, 268, 180, 42],
+    arrTips: [],
+    arrBillTips: [],
+    calcTips: function() {
+        for (var i = 0; this.bills.length < 0; i++) {
+            if (this.bills[i] < 50) {
+                this.arrTips.push(this.bills[i] * 0.2);
+                } else if (this.bills[i] >= 50 && this.bills[i] <= 200) {
+                this.arrTips.push(this.bills[i] * 0.15);
+                } else {
+                this.arrTips.push(this.bills[i] * 0.1);
+                }
+            }
+            
+            this.arrBillTips.push(this.arrTips[i] + this.bills[i]);
+            }
+        
+}; 
+jhon.calcTips();
+console.log(jhon.arrTips);

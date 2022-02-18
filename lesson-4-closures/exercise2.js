@@ -16,25 +16,25 @@
 // console.log( obj.className ); // 'my'
 // Лишних пробелов после функции образовываться не должно.
 "use strict";
-var obj = {
+var object = {
     className: 'open menu'
 };
 function removeClass(obj, cls) {
-    var arrClasses = obj.className.split(' ');  //Разбиваем className на массив классов
+    var arrClasses = object.className.split(' ');  //Разбиваем className на массив классов
     for(var  i= 0; i < arrClasses.length; i++) {    // проходимся по нему циклом  
         if(arrClasses[i] == cls) {
             arrClasses.splice(i, 1);      //Ищем в массиве нужный нам класс. Если находим его, то удаляем(splice)
             i--; //уменьшаем i, чтобы следующая итерация цикла заново проверила элемент с номером i.
+            return arrClasses.join(' '); // Возвращаем заново объединенный массив в строку
         }
     }
-    obj.className = arrClasses.join(' '); //заново объединяем массив в строку и присваиваем объекту.
 }
-console.log(removeClass(obj, 'menu'));
-console.log(obj.className);
+console.log(removeClass(object, 'menu'));
+console.log(object.className);
 
-var obj = {
+var object = {
     className: 'my menu menu'
 };
-console.log(removeClass(obj, 'menu'));
-console.log(removeClass(obj, 'blabla'));
-console.log(obj.className);
+console.log(removeClass(object, 'menu'));
+console.log(removeClass(object, 'blabla'));
+

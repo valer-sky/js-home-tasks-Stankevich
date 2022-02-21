@@ -37,4 +37,5 @@ var object = {
 };
 console.log(removeClass(object, 'menu'));
 console.log(removeClass(object, 'blabla'));
+console.log(object);
 

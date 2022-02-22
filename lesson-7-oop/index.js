@@ -22,4 +22,40 @@ function Question(question, answers, correct) {
     this.answers = answers;
     this.correct = correct;
 }
+var quest1 = new Question('The largest country in Africa?', ['Algeria', 'Sudan', 'Libya'], 0);
+var quest2 = new Question('Which US state has the largest population?', ['Florida', 'Texas', 'California', 'Alaska'], 2);                                       
+var quest3 = new Question('Where is the Karakum Desert located?',['Armenia', 'Turkmenistan', 'Armenia', 'Tajikistan'], 1);
+var questions = [quest1, quest2, quest3];
+
+Question.prototype.yourQuestion = function() {
+    console.log(this.question);
+    for (var i = 0; i < this.answers.length; i++) {
+        console.log(i + ': ' + this.answers[i]);
+    } 
+}
+
+Question.prototype.checkAnswer = function(answ) {
+    if (answ === this.correct) {
+        console.log('Correct answer! Next');
+    } else {
+        console.log('Wrong answer! Try again...');
+    }
+}
+
+var next = Math.floor(Math.random() * questions.length);
+
+questions[next].yourQuestion();
+
+var answer = +prompt('Please select the correct answer from the options.');
+    
+questions[next].checkAnswer(answer);
+
+
+    
+
+
+
+        
+   
+
 

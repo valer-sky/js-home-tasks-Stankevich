@@ -1,4 +1,4 @@
-var drinkStorage = new tHashStorage();
+var drinkStorage = new THashStorage();
 
 var drinkName = document.getElementById('drinkName');
 
@@ -12,7 +12,7 @@ drinkName.onclick = function() {
 	console.log(coctails);
 	drinkStorage.addValue(nameDr, coctails);
 	console.log(drinkStorage);
-}
+};
 
 var drinkInfo = document.getElementById("drinkInfo");
 
@@ -28,7 +28,7 @@ drinkInfo.onclick = function() {
 		} else {
 			drinkInfoP.innerHTML = "В хранилище такой напиток ОТСУТСТВУЕТ!";
 	}
-}
+};
 
 var drinkInfoDel = document.getElementById("drinkInfoDel");
 
@@ -40,11 +40,11 @@ drinkInfoDel.onclick = function() {
 		} else {
 			drinkInfoP.innerHTML = "В хранилище такой напиток отсутствует";
 	}
-}
+};
 
 var drinkList = document.getElementById("drinkList");
 
 drinkList.onclick = function() {
 	var drinkInfoP = document.getElementById("drinkInfoP");
 		drinkInfoP.innerHTML = drinkStorage.getKeys();
-}
+};

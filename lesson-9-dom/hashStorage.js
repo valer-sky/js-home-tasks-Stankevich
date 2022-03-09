@@ -1,20 +1,20 @@
 "use strict";
 
-function tHashStorage() {
+function THashStorage() {
 	this.hashStorage = {};
 }
-tHashStorage.prototype.addValue = function(key, value) {
+THashStorage.prototype.addValue = function(key, value) {
 	this.hashStorage[key] = value;
 };
-tHashStorage.prototype.getValue = function(key) {
+THashStorage.prototype.getValue = function(key) {
 	return this.hashStorage[key];
 	};
-tHashStorage.prototype.deleteValue = function(key) {
+THashStorage.prototype.deleteValue = function(key) {
 	if (!(key in this.hashStorage)) {
 		return false;
 	}
 };
-tHashStorage.prototype.getKeys = function() {
+THashStorage.prototype.getKeys = function() {
 	var keys = [];
 	for (var key in this.hashStorage) {
 		keys.push(key);

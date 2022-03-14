@@ -5,7 +5,7 @@
 // В качестве скрипта, обрабатывающего данные формы (атрибут action тега form), можно установить http://fe.it-academy.by/TestForm.php
 
 "use strict";
-var Test=[
+var Test = [
     {label:"Название сайта: ",type:"text",name:"title",placeholder:"Название сайта",required:"true",class:"form-control"},
     {label:"URL сайта: ",type:"text",name:"site",placeholder:"URL сайта",required:"true",class:"form-control"},
     {label:"Посетителей в сутки: ",type:"text",name:"persons",placeholder:"Посетителей в сутки",required:"true",class:"form-control"},
@@ -119,4 +119,4 @@ function form_create(arr,form){
             }
     }
 }
-form_create(Test,form1);
+form_create(Test,forms);

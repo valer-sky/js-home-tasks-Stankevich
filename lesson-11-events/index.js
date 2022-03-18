@@ -34,6 +34,12 @@ function dragStart (EO) {
 
 }
 
+$(function() {
+	$(dragImage).draggable({
+      containment: "parent"
+  })
+});
+
 function dragStop () {  //Сеанс перетаскивания окончен. Тут  очистка всего и вся 
   window.onmousemove = null;
   window.onmouseup = null;

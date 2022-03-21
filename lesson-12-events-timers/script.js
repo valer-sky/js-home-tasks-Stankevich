@@ -30,8 +30,6 @@ for (var i = 1; i <= hourDigits; i++) {
 	clockChildElem.classList.add('childElem');//устанавливаем готовый CSS класс для дочерных элементов
     clockChildElem.innerHTML = i;//значением каждого дочерного элемента будет равен i
 
-	
-
 	clockChildElemCenterX = clockCenterX + radius * Math.sin(angle); // узнаем центр дочерного элемента по X и Y
 	clockChildElemCenterY = clockCenterY - radius * Math.cos(angle); 
 
@@ -68,18 +66,18 @@ arrowMinutes.style.transformOrigin = "center 110px";
 arrowSeconds.style.transformOrigin = "center 135px";
 
 function tickTimer() {
-		// электронные часы
-		var time = new Date(); //текущее время
-	    clockChildElemForDigitalWatch.innerHTML = time.toLocaleTimeString();
-		// секундные стрелки
-		secondsDeg += 6; 
-	    arrowSeconds.style.transform = "rotate(" + secondsDeg + "deg)";
-	    // минутныеные стрелки
-	    minutesDeg += 6 * (1/60); 
-	    arrowMinutes.style.transform = "rotate(" + minutesDeg + "deg)";
-	    // часовые стрелки
-	    hoursDeg += 6 * (1/360); 
-	    arrowHours.style.transform = "rotate(" + hoursDeg + "deg)";
+	// электронные часы
+	var time = new Date(); //текущее время
+	clockChildElemForDigitalWatch.innerHTML = time.toLocaleTimeString();
+	// секундные стрелки
+	secondsDeg += 6; 
+	arrowSeconds.style.transform = "rotate(" + secondsDeg + "deg)";
+	// минутныеные стрелки
+	minutesDeg += 6 * (1/60); 
+	arrowMinutes.style.transform = "rotate(" + minutesDeg + "deg)";
+	// часовые стрелки
+	hoursDeg += 6 * (1/360); 
+	arrowHours.style.transform = "rotate(" + hoursDeg + "deg)";
 	}
 
 window.onload = tickTimer(); // вызываем функцию  на момент загрузки страницы

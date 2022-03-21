@@ -1,0 +1,46 @@
+#clock {
+	width: 300px;
+	height: 300px;
+	border-radius: 150px;
+	background-color: #F08080;
+}
+.childElem {
+	width: 35px;
+	height: 35px;
+	border-radius: 30px;
+	background-color: #00CED1;
+	position: absolute;
+	text-align: center;
+	line-height: 35px;
+	font-size: 22px;
+}
+.childElemForDigitalWatch {
+	width: 120px;
+	height: 30px;
+	position: absolute;
+	text-align: center;
+	line-height: 30px;
+	font-size: 25px;
+	color: black;
+}
+.arrowHours {
+	width: 9px;
+	height: 60px;
+	border-radius: 10px;
+	position: absolute;
+	background-color: black;
+}
+.arrowMinutes {
+	width: 5px;
+	height: 125px;
+	border-radius: 10px;
+	position: absolute;
+	background-color: black;
+}
+.arrowSeconds {
+	width: 2px;
+	height: 145px;
+	border-radius: 10px;
+	position: absolute;
+	background-color: #FFD700
+}

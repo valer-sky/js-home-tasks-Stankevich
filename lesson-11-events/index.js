@@ -31,10 +31,9 @@ function dragStart (EO) {
 
   window.onmousemove = dragMove;
   window.onmouseup = dragStop;
-
 }
 
-// $(function() {
+// $(function() {                   //Пытался при помощи jQuery запретить перетаскивание за родителя
 // 	$(dragImage).draggable({
 //       containment: "parent"
 //   })

@@ -3,117 +3,138 @@
 
 "use strict";
 
-const baseRadius = 300; //радиус циферблата
-const numbersBaseRadius = baseRadius / 2.5; //радиус оси цифр циферблата
-const circleRadius = 30; // радиус кружков с цифрами
-const dotSize = 14; //размер точки в центре часов
-const wrapper = document.getElementById('wrapper');
+var SVGElem = document.getElementById("SSS");
+SVGElem.classList.add('clockface');
 
-wrapper.appendChild(createWatch());
-setInterval(tickTimer, 1000);
+var Circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+Circle.setAttribute("cx", 0);
+Circle.setAttribute("cy", 0);
+Circle.setAttribute("r", 155);
+Circle.setAttribute("fill", "#fcca66");
+Circle.setAttribute("stroke", "transparent");
+Circle.setAttribute("stroke-width", 5);
+Circle.setAttribute("pathlength", 60);
+Circle.setAttribute("stroke-dashoffset", .0,5);
+SVGElem.appendChild(Circle);
 
-// UI
+// Create centre dot 
+var centreDot = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+centreDot.classList.add('ring__ring--center');
+centreDot.setAttribute("cx", 0);
+centreDot.setAttribute("cy", 0);
+centreDot.setAttribute("r", 3);
+centreDot.setAttribute("fill", "transparent");
+centreDot.setAttribute("stroke", "black");
+centreDot.setAttribute("stroke-width", 10);
+SVGElem.appendChild(centreDot);
 
-function createWatch() {
-  let base = document.createElement('div');
-  base.id = 'base';
-  base.style.width = baseRadius + 'px';
-  base.style.height = baseRadius + 'px';
-  base.appendChild(createClockFace());
-  base.appendChild(createDigitalWatch());
-  base.appendChild(createArrow('hours', 6));
-  base.appendChild(createArrow('minutes', 4));
-  base.appendChild(createArrow('seconds', 2));
-  base.appendChild(createDecorativeDot(dotSize));
-  return base;
-}
+// Create el.clock
+var elClock = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+elClock.setAttribute("x", -60);
+elClock.setAttribute("y", -50);
+elClock.setAttribute("font-size", 35);
+elClock.setAttribute("stroke-width", 15);
+elClock.textContent = '00:00:00';
+SVGElem.appendChild(elClock);
 
-function createClockFace() {
-  let clockFace = document.createDocumentFragment();
-  for (let number = 1; number <= 12; number++) {
-    let angle = number * 30 / 180 * Math.PI;
-    let x = ((baseRadius - circleRadius) / 2) + Math.round(Math.sin(angle) * numbersBaseRadius);
-    let y = ((baseRadius - circleRadius) / 2) - Math.round(Math.cos(angle) * numbersBaseRadius);
-    clockFace.appendChild(createHourCircle(x, y, number));
+var num = 12;
+var wrap = -19; // Размер часов для расположения картинок 
+var radius = 131;
+var RadiusOfHour = "39";
+var ColorOfHour = "#48b382";
+var TextLenHour = "15"; 
+for (var i = num; i > 0; i--){
+  var hour = document.createElementNS("http://www.w3.org/2000/svg",'circle');
+  var text = document.createElementNS("http://www.w3.org/2000/svg",'text');
+  text.appendChild(document.createTextNode(i));
+
+  var f = 2 / num * i * Math.PI;
+  var left = wrap + radius * Math.sin(f);
+  var top = wrap - radius * Math.cos(f);
+  hour.style.top = top;
+  hour.style.left = left;
+
+  hour.setAttribute( "cx", left + RadiusOfHour/2);
+  hour.setAttribute( "cy", top + RadiusOfHour/2 );
+  hour.setAttribute( "r", RadiusOfHour/2 );
+  hour.setAttribute( "stroke", ColorOfHour );
+  hour.setAttribute( "fill", ColorOfHour );
+  text.setAttribute("textLength",TextLenHour);
+  text.setAttribute("lengthAdjust","spacing");
+  if (i > 9){ //проверка на варавнивание текста :)
+    text.setAttribute("x",left + RadiusOfHour/ 2- TextLenHour/2-2);
+    text.setAttribute("y",top + RadiusOfHour/2 + TextLenHour/2);
+  } else {
+      text.setAttribute("x",left + RadiusOfHour/2-TextLenHour/2+1);
+      text.setAttribute("y",top + RadiusOfHour/2 +TextLenHour/2 );
   }
-  return clockFace;
+  SVGElem.appendChild(hour);
+  SVGElem.appendChild(text);
 }
+// Create hand hour
+var hours = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+hours.classList.add('hand__hand--hour');
+hours.setAttribute("x1", 0);
+hours.setAttribute("y1", 2);
+hours.setAttribute("x2", 0);
+hours.setAttribute("y2", -60);
+hours.setAttribute("stroke", "black");
+hours.setAttribute("stroke-linecap", "round");
+hours.setAttribute("stroke-width", "10");
+SVGElem.appendChild(hours);
 
-function createHourCircle(circleX, circleY, number) {
-  let circle = document.createElement('div');
-  circle.className = "number";
-  circle.style.top = circleY + 'px';
-  circle.style.left = circleX + 'px';
-  circle.appendChild(document.createTextNode(number));
-  return circle;
-}
+// Create hand minute
+var minute = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+minute.classList.add('hand__hand--minute');
+minute.setAttribute("x1", 0);
+minute.setAttribute("y1", 2);
+minute.setAttribute("x2", 0);
+minute.setAttribute("y2", -120);
+minute.setAttribute("stroke", "black");
+minute.setAttribute("stroke-linecap", "round");
+minute.setAttribute("stroke-width", "5");
+SVGElem.appendChild(minute);
 
-function createDigitalWatch() {
-  let textClock = document.createElement('div');
-  textClock.className = 'textclock';
-  textClock.style.top = baseRadius / 2 + baseRadius / 10 + 'px';
-  textClock.style.left = baseRadius / 2 - 50 + 'px';
-  ['hourstext', 'minutestext', 'secondstext'].map(watchDigits => {
-    let digits = document.createElement('span');
-    digits.className = watchDigits;
-    textClock.appendChild(digits);
-  });
-  return textClock;
-}
-
-function createArrow(arrowType, arrowWidth) {
-  let arrow = document.createElement('div');
-  arrow.className = arrowType + ' arrow';
-  arrow.style.top = baseRadius / 2 - (arrowWidth / 2) + 'px';
-  arrow.style.left = baseRadius / 2 + 'px';
-  arrow.style.transformOrigin = `0% ${arrowWidth / 2}px`;
-  return arrow;
-}
-
-function createDecorativeDot(size) {
-  let dot = document.createElement('div');
-  dot.className = 'dot';
-  dot.style.width = size + 'px';
-  dot.style.height = size + 'px';
-  dot.style.top = baseRadius / 2 - size / 2 + 'px';
-  dot.style.left = baseRadius / 2 - size / 2 + 'px';
-  return dot;
-}
+// Create hand second
+var second = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+second.classList.add('hand__hand--second');
+second.setAttribute("x1", 0);
+second.setAttribute("y1", 25);
+second.setAttribute("x2", 0);
+second.setAttribute("y2", -150);
+second.setAttribute("stroke", "black");
+second.setAttribute("stroke-linecap", "round");
+second.setAttribute("stroke-width", "2");
+SVGElem.appendChild(second);
 
 // Logic
+let UI = {
+  time: elClock,
+  second: second,
+  minute: minute,
+  hour: hours,
+};
 
-function tickTimer() {
+function getZero(num) {  // Функия на добовления нуля в электронные часы
+  if(num >= 0 && num < 10) {
+    return `0${num}`;
+  } else {
+    return num;
+  }
+}
+
+function updateClock(){
+  // GETTING TIME
   let now = new Date();
-  let thisSecond = now.getSeconds();
-  let thisMinute = now.getMinutes();
-  let thisHour = now.getHours();
-  updateWatch(thisHour, thisMinute, thisSecond);
-  updateDigitalWatch(thisHour, thisMinute, thisSecond);
+  let seconds = (now.getSeconds() + now.getMilliseconds() / 1000) / 60 * 360;
+  let minutes = (now.getMinutes() + now.getSeconds() / 60) / 60 * 360;
+  let hours = (now.getHours(0) + now.getMinutes() / 60) / 12 * 360;
+  let time = `${getZero(now.getHours())}:${getZero(now.getMinutes())}:${getZero(now.getSeconds())}`;
+  // UI Update
+  UI.time.textContent = time;
+  UI.second.style.transform = `rotate(${seconds}deg)`;
+  UI.minute.style.transform = `rotate(${minutes}deg)`;
+  UI.hour.style.transform = `rotate(${hours}deg)`;
+  requestAnimationFrame(updateClock);
 }
-
-function updateWatch(hour, minute, second) {
-  let thisSecondRotate = (second / 60) * 360 - 90;
-  let thisMinuteRotate = (minute) / 60 * 360 - 90;
-  let thisHourRotate = (hour + minute / 60) / 12 * 360 - 90;
-  rotateHandle('seconds', thisSecondRotate);
-  rotateHandle('minutes', thisMinuteRotate);
-  rotateHandle('hours', thisHourRotate);
-}
-
-function rotateHandle(handle, degree) {
-  let arrow = document.querySelector(`.${handle}`);
-  arrow.style.transform = `rotate(${degree}deg)`;
-}
-
-function updateDigitalWatch(hour, minute, second) {
-  let digitalWatchSeconds = document.querySelector('.secondstext');
-  let digitalWatchMinutes = document.querySelector('.minutestext');
-  let digitalWatchHours = document.querySelector('.hourstext');
-  digitalWatchSeconds.textContent = addZeroToNumber(second);
-  digitalWatchMinutes.textContent = addZeroToNumber(minute);
-  digitalWatchHours.textContent = addZeroToNumber(hour);
-}
-
-function addZeroToNumber(currentTime) {
-  return (`${currentTime}`.length < 2) ? (`0${currentTime}`) : currentTime;
-}
+  requestAnimationFrame(updateClock);

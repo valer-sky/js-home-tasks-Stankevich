@@ -33,11 +33,9 @@ function dragStart (EO) {
   window.onmouseup = dragStop;
 }
 
-// $(function() {                   //Пытался при помощи jQuery запретить перетаскивание за родителя
-// 	$(dragImage).draggable({
-//       containment: "parent"
-//   })
-// });
+$(function() {                   //Пытался при помощи jQuery запретить перетаскивание за родителя
+	$(dragImage).draggable({containment: "parent"});
+});
 
 function dragStop () {  //Сеанс перетаскивания окончен. Тут  очистка всего и вся 
   window.onmousemove = null;

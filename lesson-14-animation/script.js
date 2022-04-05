@@ -1,218 +1,213 @@
 "use strict";
 
-const paddleHeight = 150;
-    const paddleWidth = 10;
-    const speedOfPaddle = 0;
-    const positionYpaddle1 = 129.5;
-    const positionXpaddle1 = 0;
-    const positionYpaddle2 = 129.5;
-    const positionXpaddle2 = 585;
+const racketHeight = 150;
+const racketWidth = 10;
+const speedOаracket = 0;
+const positionYracket1 = 129.5;
+const positionXracket1 = 0;
+const positionYracket2 = 129.5;
+const positionXracket2 = 585;
 
-    const ballWidth = 25;
-    const ballHeight = 25;
+const ballWidth = 25;
+const ballHeight = 25;
 
-    const ballPosX = 295;
-    const ballPosY = 195;
-    const ballSpeedY = 0;
-    const ballSpeedX = 0;
+const ballPosX = 295;
+const ballPosY = 195;
+const ballSpeedY = 0;
+const ballSpeedX = 0;
 
-    const courtWidth = 600;
-    const courtHeight = 400;
-    const score = 0;
-    const offset = 5;
-    let gameInterval = undefined;
+const courtWidth = 600;
+const courtHeight = 400;
+const score = 0;
+const offset = 5;
+let gameInterval = undefined;
 
-    //создаем панель с кнопкой и счетом
-    var section = document.getElementById('section');
-    var scorePanel = document.createElement('div');
-    scorePanel.id = 'scorePanelId';
-    scorePanel.style.cssText = 'width:600px;height:100px;margin:0;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;';
-    section.appendChild(scorePanel);
+//UI
 
-    //создаем кнопку
-    var buttonStart = document.createElement('button');
-    buttonStart.id = 'btnStart';
-    buttonStart.textContent = "Старт!";
-    buttonStart.style.cssText = 'cursor: pointer;';
-    scorePanel.appendChild(buttonStart);
+//создаем панель с кнопкой и счетом
+var section = document.getElementById('section');
 
-    //создаем счет
-    var scoreTable = document.createElement('div');
-    scoreTable.innerHTML = '<span id="score1">0</span><span>:</span><span id="score2">0</span>';
-    scoreTable.id = 'table';
-    scoreTable.style.cssText = 'margin-left:210px; font-weight:700;';
-    scorePanel.appendChild(scoreTable);
+//создаем кнопку
+var buttonStart = document.createElement('button');
+buttonStart.textContent ='старт!';
+buttonStart.style.cssText = 'width: 100px;height: 30px; background-color: #d9d9d3;font-size: 18px;cursor: pointer;transform: translate(-250%, 180%);';
+section.appendChild(buttonStart);
 
-    //создаем корт
-    var court = document.createElement('div');
-    court.id = 'courtId';
-    court.style.cssText = 'width: 600px;height:400px; margin:0; position:relative; border: solid rgb(95, 92, 92) 1px;  background-color: #f0ee7e;';
-    section.appendChild(court);
+//создаем счет
+var scoreTable = document.createElement('div');
+scoreTable.innerHTML = '<span id="score1">0</span><span>:</span><span id="score2">0</span>';
+scoreTable.style.cssText = 'font-weight:500px;';
+section.append(scoreTable);
 
-    //создаем мяч
-    var ballElem = document.createElement('div');
-    ballElem.id = 'ball';
-    ballElem.style.cssText = 'width:30px; height:30px; border-radius:50%; top:195px; left:295px; position:absolute; background-color:#f02137;';
-    court.appendChild(ballElem);
+//создаем корт
+var court = document.createElement('div');
+court.style.cssText = 'width:600px; height:400px; margin:0; position: relative; border:solid #889683 2px; background-color: #f0ee7e;';
+section.appendChild(court);
 
-    //создаем рокетку1
-    var paddle1 = document.createElement('div');
-    paddle1.id = 'paddle1';
-    paddle1.style.cssText = 'width:15px; height:150px; top:129.5px; left:0px; position:absolute; background-color:#09aa57;';
-    court.appendChild(paddle1);
+//создаем мяч
+var ballElem = document.createElement('div');
+ballElem.id = 'ball';
+ballElem.style.cssText = 'width: 30px; height: 30px; background-color: #f02137; border-radius: 50%; position:absolute; top:180px; left:285px;';
+court.appendChild(ballElem);
+ 
+//создаем рокетку1
+var racket1 = document.createElement('div');
+racket1.id = 'racket1';
+racket1.style.cssText = 'width:15px; height:150px; background-color:#09aa57; left:0px; position:absolute;';
+court.appendChild(racket1);
+//создаем рокетку2
+var racket2 = document.createElement('div');
+racket2.id = 'racket2';
+racket2.style.cssText = 'width:15px; height:150px; background-color:#191497; right:0px; position:absolute;';
+court.appendChild(racket2);
 
-    //создаем рокетку2
-    var paddle2 = document.createElement('div');
-    paddle2.id = 'paddle2';
-    paddle2.style.cssText = 'width:15px; height:150px; top:129.5px; right:0px; position:absolute; background-color:#191497;';
-    court.appendChild(paddle2);
+//конструктор рокетки
+function Paddle(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = racketWidth;
+    this.height = racketHeight;
+    this.score = score;
+    this.speed = speedOаracket;
+}
+racket1 = new Paddle(positionXracket1, positionYracket1);
+racket2 = new Paddle(positionXracket2, positionYracket2);
 
+//конструктор мяча
+function Ball () {
+    this.x = ballPosX;
+    this.y = ballPosY;
+    this.speedX = ballSpeedX;
+    this.speedy = ballSpeedY;
+    this.width = ballWidth;
+    this.height = ballHeight;
+}
+var ball = new Ball();
+
+// Logic
+
+startGame();
+
+function startGame() {
+    stopGame();
+    gameInterval = setInterval(showGame, 1000/ 50);
+};
+
+function stopGame() {
+    clearInterval(gameInterval);
+};
+
+//запуск мяча в разном направлении
+buttonStart.addEventListener('click', function() {
     startGame();
+    startBall();
+});
 
-    function startGame() {
-        stopGame();
-        gameInterval = setInterval(showGame, 1000 / 50);
+function startBall() {
+    ball.x = ballPosX;
+    ball.y = ballPosY;
+    if(Math.random() < 0.5) {
+        var side = 1;
+    } else {
+        var side = -1;
     };
 
-    function stopGame() {
-        clearInterval(gameInterval);
+    ball.speedX = side * (Math.random() * 2 + 3); //при старте мяча устанавливвем рандомную скорость по x с меняющимся напрвлением влево либо право
+    ball.speedY = Math.random() * 2 + 3; //при старте мяча устанавливвем рандомную скорость по y
+};
+
+//при нажатии на кнопки-происходят события - смещаются рокетки
+document.addEventListener('keydown', (event) => { 
+    if(event.keyCode == 16 || event.which == 16) {  // shift key
+        racket1.speed = -10;
     };
-
-    //конструктор рокетки
-    function Paddle(x, y) {
-        this.x = x;
-        this.y = y;
-        this.width = paddleWidth;
-        this.height = paddleHeight;
-        this.score = score;
-        this.speed = speedOfPaddle;
+    if(event.keyCode == 17 || event.which == 17) {  // ctrl Key
+        racket1.speed = 10;
     };
-
-    var paddle1 = new Paddle(positionXpaddle1, positionYpaddle1);
-    var paddle2 = new Paddle(positionXpaddle2, positionYpaddle2);
-
-
-    //конструктор мяча
-    function Ball() {
-        this.x = ballPosX;
-        this.y = ballPosY;
-        this.speedX = ballSpeedX;
-        this.speedY = ballSpeedY;
-        this.width = ballWidth;
-        this.height = ballHeight;
-    }
-    var ball = new Ball();
-
-    //запуск мяча в разном направлении
-    document.getElementById('btnStart').addEventListener('click', function() {
-        startGame();
-        startBall();
-    })
-
-    function startBall() {
-        ball.y = ballPosY;
-        ball.x = ballPosX;
-        if (Math.random() < 0.5) {
-            var side = 1;
-        } else {
-            var side = -1;
-        };
-
-        ball.speedY = Math.random() * 2 + 3; //при старте мяча устанавливвем рандомную скорость по y
-        ball.speedX = side * (Math.random() * 2 + 3); //при старте мяча устанавливвем рандомную скорость по x с меняющимся напрвлением влево либо право
+    if (event.keyCode == 38 || event.which == 38) { // up arrow
+        racket2.speed = -10;
     };
-
-    //при нажатии на кнопки-происходят события - смещаются рокетки
-    document.addEventListener('keydown', function(event) {
-        if (event.keyCode == 16 || event.which == 16) { // shift key
-            paddle1.speed = -10;
-        };
-        if (event.keyCode == 17 || event.which == 17) { // ctrl Key
-            paddle1.speed = 10;
-        };
-        if (event.keyCode == 38 || event.which == 38) { // up arrow
-            paddle2.speed = -10;
-        };
-        if (event.keyCode == 40 || event.which == 40) { // down arrow
-            paddle2.speed = 10;
-        };
-    }, false);
-
-    //отпустили кнопку-событие перемещение останавливается
-    document.addEventListener('keyup', function(event) {
-        if (event.keyCode == 16 || event.which == 16) {
-            paddle1.speed = 0;
-        };
-        if (event.keyCode == 17 || event.which == 17) {
-            paddle1.speed = 0;
-        };
-        if (event.keyCode == 38 || event.which == 38) {
-            paddle2.speed = 0;
-        };
-        if (event.keyCode == 40 || event.which == 40) {
-            paddle2.speed = 0;
-        };
-    }, false);
-
-
-    function showGame() {
-        paddle1.y += paddle1.speed; //нажатие кнопок-сработка события-изменение скорости рокеток-устанавливаем новое положение рокетки равное текщему положениею плюс изменение по скорости
-        paddle2.y += paddle2.speed;
-
-        ball.y += ball.speedY; //при старте мяча-меняется скорость по X и Y- тем самым меняются позиции мяча по X и Y
-        ball.x += ball.speedX;
-
-        //если позиция ракеток по y меньше 10-устанавливаем позицию по y  равную 0
-        if (paddle1.y < 10) {
-            paddle1.y = 0;
-        };
-
-        if (paddle2.y < 10) {
-            paddle2.y = 0;
-        };
-
-        //если позиция рокетки по Y  большее или равно растоянию= высота корта минус высота ракетки- устанавливаем позицию по y  равную 400 минус высота рокетки
-        if (paddle1.y >= courtHeight - paddle1.height) {
-            paddle1.y = courtHeight - paddle1.height;
-        };
-
-        if (paddle2.y >= courtHeight - paddle2.height) {
-            paddle2.y = courtHeight - paddle2.height;
-        };
-
-        //если позиция мяча по Y  меньше или равно 0(верхний край) либо больше или равно растоянию=высота поля минус высота мяча(нижний край)
-        if (ball.y <= 0 || ball.y >= courtHeight - ball.height - offset) {
-            ball.speedY = -ball.speedY; //меняем скорость  мяча на противоположное число
-        };
-
-        //от левого края до ширина ракетки1
-        if (ball.x <= paddle1.width + offset) {
-            if (ball.y > paddle1.y && ball.y < paddle1.y + paddle1.height) { //мяч находится в рамках высоты рокетки
-                ball.speedX = -ball.speedX; //меняем скорость на противоположное число-отби 1вает мяч ракетка
-            } else {
-                ball.x = 0;
-                paddle2.score++; //меняется счет
-                stopGame();
-            };
-        };
-
-        //если больше или равно расcтояния = правый край минус ширина рокетки и минус ширина мяча
-        if (ball.x >= courtWidth - ball.width - paddle2.width - offset) {
-            if (ball.y > paddle2.y && ball.y < paddle2.y + paddle2.height) { //мяч находится в рамках высоты рокетки
-                ball.speedX = -ball.speedX;
-            } else {
-                ball.x = courtWidth - ballWidth - offset;
-                paddle1.score++;
-                stopGame();
-            };
-        };
-
-        document.getElementById("paddle1").style.top = (paddle1.y) + "px";
-        document.getElementById("paddle2").style.top = (paddle2.y) + "px";
-
-        document.getElementById("ball").style.top = (ball.y) + "px";
-        document.getElementById("ball").style.left = (ball.x) + "px";
-
-        document.getElementById('score1').innerHTML = paddle1.score.toString();
-        document.getElementById('score2').innerHTML = paddle2.score.toString();
+    if (event.keyCode == 40 || event.which == 40) { // down arrow
+        racket2.speed = 10;
     };
+}, false);
+
+//отпустили кнопку-событие перемещение останавливается
+document.addEventListener('keyup', function(event) {
+    if (event.keyCode == 16 || event.which == 16) {
+        racket1.speed = 0;
+    };
+    if (event.keyCode == 17 || event.which == 17) {
+        racket1.speed = 0;
+    };
+    if (event.keyCode == 38 || event.which == 38) {
+        racket2.speed = 0;
+    };
+    if (event.keyCode == 40 || event.which == 40) {
+        racket2.speed = 0;
+    };
+}, false);
+
+// **************************************************************************************************
+
+// function showGame() {
+//     racket1.y += racket1.speed; //нажатие кнопок-сработка события-изменение скорости рокеток-устанавливаем новое положение рокетки равное текщему положениею плюс изменение по скорости
+//     racket2.y += racket2.speed;
+
+//     ball.y += ball.speedY; //при старте мяча-меняется скорость по X и Y- тем самым меняются позиции мяча по X и Y
+//     ball.x += ball.speedX;
+
+//     //если позиция ракеток по y меньше 10-устанавливаем позицию по y  равную 0
+//     if (racket1.y < 10) {
+//         racket1.y = 0;
+//     };
+
+//     if (racket2.y < 10) {
+//         racket2.y = 0;
+//     };
+
+//     //если позиция рокетки по Y  большее или равно растоянию= высота корта минус высота ракетки- устанавливаем позицию по y  равную 400 минус высота рокетки
+//     if (racket1.y >= courtHeight - racket1.height) {
+//         racket1.y = courtHeight - racket1.height;
+//     };
+
+//     if (racket2.y >= courtHeight - racket2.height) {
+//         racket2.y = courtHeight - racket2.height;
+//     };
+
+//     //если позиция мяча по Y  меньше или равно 0(верхний край) либо больше или равно растоянию=высота поля минус высота мяча(нижний край)
+//     if (ball.y <= 0 || ball.y >= courtHeight - ball.height - offset) {
+//         ball.speedY = -ball.speedY; //меняем скорость  мяча на противоположное число
+//     };
+
+//     //от левого края до ширина ракетки1
+//     if (ball.x <= racket1.width + offset) {
+//         if (ball.y > racket1.y && ball.y < racket1.y + racket1.height) { //мяч находится в рамках высоты рокетки
+//             ball.speedX = -ball.speedX; //меняем скорость на противоположное число-отби 1вает мяч ракетка
+//         } else {
+//             ball.x = 0;
+//             racket2.score++; //меняется счет
+//             stopGame();
+//         };
+//     };
+
+//     //если больше или равно расcтояния = правый край минус ширина рокетки и минус ширина мяча
+//     if (ball.x >= courtWidth - ball.width - racket2.width - offset) {
+//         if (ball.y > racket2.y && ball.y < racket2.y + racket2.height) { //мяч находится в рамках высоты рокетки
+//             ball.speedX = -ball.speedX;
+//         } else {
+//             ball.x = courtWidth - ballWidth - offset;
+//             racket1.score++;
+//             stopGame();
+//         };
+//     };
+
+//     document.getElementById("racket1").style.top = (racket1.y) + "px";
+//     document.getElementById("racket2").style.top = (racket2.y) + "px";
+
+//     document.getElementById("ball").style.top = (ball.y) + "px";
+//     document.getElementById("ball").style.left = (ball.x) + "px";
+
+//     document.getElementById('score1').innerHTML = racket1.score.toString();
+//     document.getElementById('score2').innerHTML = racket2.score.toString();
+// };

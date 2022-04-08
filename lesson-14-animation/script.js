@@ -86,17 +86,15 @@ var ball = new Ball();
 startGame();
 
 function startGame() {
-    gameInterval = setInterval(showGame, 1000/50);
+    gameInterval = setInterval(showGame, 20);
 };
 
 function stopGame() {
-   clearInterval(gameInterval);
+    clearInterval(gameInterval);
 };
 
 //запуск мяча в разном направлении
 buttonStart.addEventListener('click', function() {
-    var sound = new Audio('sounds/theme.mp3');
-    sound.play();
     stopGame();
     startGame();
     startBall();
@@ -110,7 +108,6 @@ function startBall() {
     } else {
         var side = -1;
     };
-    
     ball.speedX = side * (Math.random() * 2 + 3); //при старте мяча устанавливвем рандомную скорость по x с меняющимся напрвлением влево либо право
     ball.speedY = Math.random() * 2 + 3; //при старте мяча устанавливвем рандомную скорость по Y
 };
@@ -183,6 +180,8 @@ function showGame() {
     if (ball.x <= racket1.width + offset) {
         if (ball.y > racket1.y && ball.y < racket1.y + racket1.height) { //мяч находится в рамках высоты рокетки
             ball.speedX = -ball.speedX; //меняем скорость на противоположное число-отби 1вает мяч ракетка
+            var sound = new Audio('sounds/food.mp3');
+            sound.play();
         } else {
             ball.x = 0;
             racket2.score++; //меняется счет
@@ -194,6 +193,8 @@ function showGame() {
     if (ball.x >= courtWidth - ball.width - racket2.width - offset) {
         if (ball.y > racket2.y && ball.y < racket2.y + racket2.height) { //мяч находится в рамках высоты рокетки
             ball.speedX = -ball.speedX;
+            var sound = new Audio('sounds/food.mp3');
+            sound.play();
         } else {
             ball.x = courtWidth - ballWidth - offset;
             racket1.score++;

@@ -111,7 +111,6 @@ function startBall() {
     ball.speedX = side * (Math.random() * 2 + 3); //при старте мяча устанавливвем рандомную скорость по x с меняющимся напрвлением влево либо право
     ball.speedY = Math.random() * 2 + 3; //при старте мяча устанавливвем рандомную скорость по Y
 };
-
 //при нажатии на кнопки-происходят события - смещаются рокетки
 document.addEventListener('keydown', (event) => { 
     if(event.keyCode == 16 || event.which == 16) {  // shift key
@@ -127,7 +126,6 @@ document.addEventListener('keydown', (event) => {
         racket2.speed = 10;
     };
 }, false);
-
 //отпустили кнопку-событие перемещение останавливается
 document.addEventListener('keyup', function(event) {
     if (event.keyCode == 16 || event.which == 16) {
@@ -150,7 +148,6 @@ function showGame() {
 
     ball.y += ball.speedY; //при старте мяча меняется скорость по X и Y и  позиции мяча по X и Y
     ball.x += ball.speedX;
-
     //если позиция ракеток по Y меньше 10-устанавливаем позицию по Y равную 0
     if (racket1.y < 10) {
         racket1.y = 0;
@@ -159,7 +156,6 @@ function showGame() {
     if (racket2.y < 10) {
         racket2.y = 0;
     };
-
     //если позиция рокетки по Y  большее или равно растояни Y высота корта минус высота ракетки- устанавливаем позицию по y  равную 400 минус высота рокетки
     if (racket1.y >= courtHeight - racket1.height) {
         racket1.y = courtHeight - racket1.height;
@@ -168,14 +164,12 @@ function showGame() {
     if (racket2.y >= courtHeight - racket2.height) {
         racket2.y = courtHeight - racket2.height;
     };
-
     //если позиция мяча по Y  меньше или равно 0(верхний край) либо больше или равно растоянию=высота поля минус высота мяча(нижний край)
     if (ball.y <= 0 || ball.y >= courtHeight - ball.height - offset) {
         ball.speedY = -ball.speedY; //меняем скорость  мяча на противоположное число
         var sound = new Audio('sounds/food.mp3');
             sound.play();
     };
-
     //от левого края до ширина ракетки1
     if (ball.x <= racket1.width + offset) {
         if (ball.y > racket1.y && ball.y < racket1.y + racket1.height) { //мяч находится в рамках высоты рокетки
@@ -188,7 +182,6 @@ function showGame() {
             stopGame();
         };
     };
-
     //если больше или равно расcтояния = правый край минус ширина рокетки и минус ширина мяча
     if (ball.x >= courtWidth - ball.width - racket2.width - offset) {
         if (ball.y > racket2.y && ball.y < racket2.y + racket2.height) { //мяч находится в рамках высоты рокетки
@@ -201,7 +194,6 @@ function showGame() {
             stopGame();
         };
     };
-
     document.getElementById("racket1").style.top = (racket1.y) + "px";
     document.getElementById("racket2").style.top = (racket2.y) + "px";
 

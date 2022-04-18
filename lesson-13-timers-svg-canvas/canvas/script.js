@@ -3,9 +3,11 @@
 
 "use strict";
 
-function updateClock(){
+function updateClock() {
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
+  canvas.width = '350';
+  canvas.height = '350';
   context.strokeRect(0, 0, canvas.width, canvas.height);
   
   //Расчет координат центра и радиуса часов
@@ -16,16 +18,21 @@ function updateClock(){
   //Очистка экрана
   context.fillStyle = "#ffffff";
   context.fillRect(0, 0, canvas.width,canvas.height);
-    
+
+  createCircle();
+  createCircleClock();
+  
   //Рисуем контур часов
+  function createCircle() {
   context.fillStyle =  "#fcca66";
   context.beginPath();
   context.arc(xCenterClock, yCenterClock, radiusClock, 0, Math.PI*2, true);
   context.moveTo(xCenterClock, yCenterClock);
   context.fill();
   context.closePath();
-  
+  }
   //Рисуем кружочки часов
+  function createCircleClock() {
   var radiusNum = radiusClock - 27; //Радиус расположения кружочков
   var radiusPoint;
   for(var tm = 0; tm < 60; tm++){
@@ -34,7 +41,8 @@ function updateClock(){
         radiusPoint = 22;
       } else { 
       radiusPoint = 0;
-  } //для выделения часовых кружков
+  } 
+    //для выделения часовых кружков
     var xPointM = xCenterClock + radiusNum * Math.cos(-6*tm*(Math.PI/180) + Math.PI/2);
     var yPointM = yCenterClock - radiusNum * Math.sin(-6*tm*(Math.PI/180) + Math.PI/2);
     context.arc(xPointM, yPointM, radiusPoint, 0, 2*Math.PI, true);
@@ -42,7 +50,6 @@ function updateClock(){
     context.fill();
     context.closePath();
   }
-  
   //Оцифровка циферблата часов
   for(var th = 1; th <= 12; th++){
     context.beginPath();
@@ -58,8 +65,10 @@ function updateClock(){
     context.stroke();
     context.closePath();	
     }
-          
+    
   // Точка 
+  createDote(); 
+  function createDote() {
   context.beginPath();
   context.fillStyle = 'black';
   context.lineWidth = 3;
@@ -67,6 +76,7 @@ function updateClock(){
   context.stroke();
   context.fill();
   context.closePath();
+  }
   
   // Функия на добовления нуля в электронные часы
   function getZero(num) {  
@@ -76,22 +86,27 @@ function updateClock(){
     return num;
     }
   }
-  //Рисуем стрелки
-  var lengthSeconds = radiusNum + 10;
-  var lengthMinutes = radiusNum - 15;
-  var lengthHour = lengthMinutes / 1.5;
   var now = new Date();                                       //Получаем экземпляр даты
   var t_sec = 6*now.getSeconds();                             //Определяем угол для секунд
   var t_min = 6*(now.getMinutes() + (1/60)*now.getSeconds()); //Определяем угол для минут
   var t_hour = 30*(now.getHours() + (1/60)*now.getMinutes()); //Определяем угол для часов
   var time = `${getZero(now.getHours())}:${getZero(now.getMinutes())}:${getZero(now.getSeconds())}`;
-  
+
   // Электронный циферблат
   context.fillStyle = 'black';
   context.font = 'normal 30px Arial';
   context.fillText(time, 120, 120);
   
+  createArrows();
+  
+  //Рисуем стрелки
+  function createArrows() {
+  var lengthSeconds = radiusNum + 10;
+  var lengthMinutes = radiusNum - 15;
+  var lengthHour = lengthMinutes / 1.5;
+  arrows();
   //Рисуем секунды
+  function arrowsSec() {
   context.beginPath();
   context.lineWidth = 2;
   context.strokeStyle = "black";
@@ -100,8 +115,10 @@ function updateClock(){
               yCenterClock - lengthSeconds*Math.sin(Math.PI/2 - t_sec*(Math.PI/180)));
   context.stroke();
   context.closePath();
+  }
   
   //Рисуем минуты
+  function arrowsMinute() {
   context.beginPath();
   context.strokeStyle =  "black";
   context.lineWidth = 4;
@@ -110,15 +127,26 @@ function updateClock(){
                yCenterClock - lengthMinutes*Math.sin(Math.PI/2 - t_min*(Math.PI/180)));
   context.stroke();
   context.closePath();
+  }
+  arrowsMinute();
   
   //Рисуем часы
+  function arrowsHour() {
   context.beginPath();
   context.lineWidth = 7;
   context.moveTo(xCenterClock, yCenterClock);
   context.lineTo(xCenterClock + lengthHour*Math.cos(Math.PI/2 - t_hour*(Math.PI/180)),
                yCenterClock - lengthHour*Math.sin(Math.PI/2 - t_hour*(Math.PI/180)));
   context.stroke();
-  context.closePath();	
-  requestAnimationFrame(updateClock);
+  context.closePath();
   }
-  requestAnimationFrame(updateClock);
+  function arrows() {
+    arrowsMinute();
+    arrowsSec();
+    arrowsHour();
+      }	
+    }
+  } 
+requestAnimationFrame(updateClock);
+}
+requestAnimationFrame(updateClock);

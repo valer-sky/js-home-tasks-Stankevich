@@ -1,4 +1,4 @@
-var drinkStorage = new THashStorage();
+var drinkStorage = new TLocalStorage('lsDrink');
 
 var drinkName = document.getElementById('drinkName');
 
@@ -11,6 +11,7 @@ drinkName.onclick = function() {
 	coctails.recipe = prompt("напишите рецепт напитка - " + nameDr);
 	console.log(coctails);
 	drinkStorage.addValue(nameDr, coctails);
+	drinkStorage.store();
 	console.log(drinkStorage);
 };
 

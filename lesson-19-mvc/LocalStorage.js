@@ -1,26 +1,37 @@
 "use strict";
 
-function THashStorage() {
-	this.hashStorage = {};
-}
-THashStorage.prototype.addValue = function(key, value) {
-	this.hashStorage[key] = value;
+function TLocalStorage(lsKeyName) {
+	this.lsHash = {};
+	if (localStorage.getItem(lsKeyName)) {
+		if (lsKeyName == "lsDrink") {
+			var myObject = JSON.parse(localStorage.lsDrink);
+			this.lsHash = myObject;
+		}
+	}
+	TLocalStorage.prototype.addValue = function(key, value) {
+	this.lsHash[key] = value;
 };
-THashStorage.prototype.getValue = function(key) {
-	return this.hashStorage[key];
+	TLocalStorage.prototype.getValue = function(key) {
+		return this.lsHash[key];
 	};
-THashStorage.prototype.deleteValue = function(key) {
-	if (!(key in this.hashStorage)) {
-		return false;
+
+	TLocalStorage.prototype.deleteValue = function(key) {
+		if (!(key in this.lsHash)) {
+			return false;
 	}
 };
-THashStorage.prototype.getKeys = function() {
-	var keys = [];
-	for (var key in this.hashStorage) {
-		keys.push(key);
+	TLocalStorage.prototype.getKeys = function() {
+		var keys = [];
+			for (var key in this.lsHash) {
+			keys.push(key);
+		}
+		return keys;
+	};
+	TLocalStorage.prototype.store = function() {
+		localStorage.setItem(lsKeyName, JSON.stringify(this.lsHash));
 	}
-	return keys;
-};
+
+}
 
 
 

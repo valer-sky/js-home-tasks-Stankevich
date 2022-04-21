@@ -1,4 +1,5 @@
-var drinkStorage = new TLocalStorage('lsDrink');
+var drinkStorage = new TAJAXStorage();
+var drinksAjaxStorage = new DrinkAjaxStorage();
 
 var drinkName = document.getElementById('drinkName');
 
@@ -11,7 +12,8 @@ drinkName.onclick = function() {
 	coctails.recipe = prompt("напишите рецепт напитка - " + nameDr);
 	console.log(coctails);
 	drinkStorage.addValue(nameDr, coctails);
-	drinkStorage.store();
+    drinksAjaxStorage.setLoc();
+	
 	console.log(drinkStorage);
 };
 
@@ -38,6 +40,7 @@ drinkInfoDel.onclick = function() {
 	var drinkInfoP = document.getElementById("drinkInfoP");
 		if (drinkStorage.deleteValue(drinkInfoDel) === true) {
 			drinkInfoP.innerHTML = "информация о напитке УДАЛЕНО!";
+            drinksAjaxStorage.setLoc();
 		} else {
 			drinkInfoP.innerHTML = "В хранилище такой напиток отсутствует";
 	}

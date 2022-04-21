@@ -55,7 +55,7 @@ function readReady(callresult) {
     }
         
     else if (callresult.result != "") {
-        this.hashStorage = JSON.parse(callresult.result);
+        hashStorage = JSON.parse(callresult.result);
     }
 }
 restoreInfo();

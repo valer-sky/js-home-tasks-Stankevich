@@ -1,0 +1,32 @@
+a {
+  display: flex;
+  text-decoration: underline;
+}
+a:hover {
+  cursor: pointer;
+}
+h2 {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+}
+/* #moto_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+#moto_list div {
+  padding: 15px;
+} */
+/* #moto_item {
+  width: calc(100% - 180px);
+  float: right;
+} */
+/* .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+} */
+li {
+  list-style-type: none;
+  text-decoration: underline;
+}

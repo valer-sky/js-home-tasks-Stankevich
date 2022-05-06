@@ -58,6 +58,7 @@ window.onhashchange = renderNewState;
             }
             const p = document.createElement("p");
             const a = document.createElement("a");
+            a.style.cssText = 'text-decoration: underline; cursor: pointer;';
             a.id = article.id;
             a.setAttribute("onclick", "switchToArticle()");
             a.innerHTML = article.title;
@@ -104,7 +105,7 @@ window.onhashchange = renderNewState;
             let articlesA = JSON.parse(data.result).sort(sortByName);
             for (let i = 0; i < articlesA.length; i++) {
               let article = articlesA[i];
-              articleNavList += '<li><a id="' + article.id + '" onclick="switchToArticle()">' +
+              articleNavList += '<li style="cursor: pointer;"><a style="text-decoration: underline;"  id="' + article.id + '" onclick="switchToArticle()">' +
                 article.title + '</a></li>';
             }
             articleNavList = '<ul>' + articleNavList + '</ul>';
@@ -139,14 +140,14 @@ window.onhashchange = renderNewState;
               '<section id="main"><p class="main_info">В данной энциклопедии вы найдете описание наиболее' +
               " известных марок мотоциклов</p>";
             page +=
-              '<p class="main_info"><a onclick="switchToMenu()">Список статей здесь</a></p></section>';
+              '<p class="main_info"><a style="text-decoration: underline; cursor: pointer;" onclick="switchToMenu()">Список статей здесь</a></p></section>';
             break;
           case "Menu":
             update();
             page += "<h2>Оглавление</h2>";
             page += '<section id="moto_list"></section>';
             page +=
-              '<input id="button" type="button" value="На главную" onclick="switchToMain()">';
+              '<input id="button" type="button" style="cursor: pointer;" value="На главную" onclick="switchToMain()">';
             break;
           case `${articleID}`:
             openArticle();
